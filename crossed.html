@@ -75,6 +75,10 @@
             z-index: -1;
         }
 
+        #image-holder img {
+            width: 100%;
+        }
+
         button,
         .button {
             padding: 10px;
@@ -101,8 +105,9 @@
 
 
 
-    <div class="crossed relative">
+    <div id="crossed" class="crossed relative">
         <div id="image-holder" class="image absolute flex">
+            <img class="flex" src="./俄羅斯風格馬車.jpg">
         </div>
     </div>
 
@@ -139,12 +144,46 @@
 </body>
 <script>
     const uploadBtn = document.querySelector("#upload_input");
-    const imageElem = document.querySelector(".main-image");
+    const imageElem = document.querySelector("img");
+    const imageHolder = document.querySelector("#image-holder");
+    const aspectSelect = document.querySelector("#aspect-select");
+    const crossedElem = document.querySelector("#crossed");
+
+    // imageHolder.style.background = `url('./俄羅斯風格馬車.jpg')`;
+
     uploadBtn.addEventListener('change', function () {
         const curFiles = uploadBtn.files;
         console.log(curFiles);
         const tmpPath = URL.createObjectURL(curFiles[0]);
-        document.querySelector('#image-holder').style.background = `url('${tmpPath}')`;
+        // imageHolder.style.background = `url('${tmpPath}')`;
+        imageElem.src = tmpPath;
+    });
+
+    aspectSelect.addEventListener('change', (event) => {
+        const crossedElem = document.querySelector("#crossed");
+        switch (event.target.value) {
+            case 'four_three':
+                crossedElem.style.width = "400px";
+                crossedElem.style.height = "300px";
+                break;
+            case 'three_four':
+                crossedElem.style.width = "300px";
+                crossedElem.style.height = "400px";
+                break;
+            case 'nine_sixteen':
+                crossedElem.style.width = "450px";
+                crossedElem.style.height = "320px";
+                break;
+            case 'nine_sixteen':
+                crossedElem.style.width = "320px";
+                crossedElem.style.height = "450px";
+                break;
+            case 'one_one':
+            default:
+                crossedElem.style.width = "400px";
+                crossedElem.style.height = "400px";
+                break;
+        }
     });
 
 </script>
